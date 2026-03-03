@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Birthday Surprise</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+
+body{
+background:linear-gradient(135deg,#fff0f5,#ffe4e1);
+margin:0;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+font-family:'Segoe UI',sans-serif;
+}
+
+/* pages */
+.page{
+display:none;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+height:100vh;
+width:100%;
+text-align:center;
+}
+
+.active{
+display:flex;
+}
+
+/* cover */
+.cover{
+background:white;
+padding:50px 70px;
+border-radius:20px;
+box-shadow:0 10px 40px rgba(0,0,0,0.15);
+cursor:pointer;
+transition:0.3s;
+}
+
+.cover:hover{
+transform:scale(1.05);
+}
+
+/* calendar */
+.calendar-box{
+background:white;
+padding:30px;
+border-radius:20px;
+box-shadow:0 10px 40px rgba(0,0,0,0.15);
+}
+
+.calendar{
+display:grid;
+grid-template-columns:repeat(7,60px);
+gap:10px;
+justify-content:center;
+}
+
+.day{
+font-weight:bold;
+}
+
+.date{
+padding:12px;
+background:#f8f9fa;
+border-radius:10px;
+cursor:pointer;
+}
+
+.date:hover{
+background:#ffd6e0;
+}
+
+.highlight{
+background:#ff4d6d;
+color:white;
+animation:pulse 1s infinite;
+}
+
+@keyframes pulse{
+0%{box-shadow:0 0 5px #ff4d6d;}
+50%{box-shadow:0 0 20px #ff4d6d;}
+100%{box-shadow:0 0 5px #ff4d6d;}
+}
+
+/* gift */
+.gift{
+font-size:100px;
+cursor:pointer;
+animation:bounce 1s infinite;
+}
+
+@keyframes bounce{
+0%,100%{transform:translateY(0);}
+50%{transform:translateY(-15px);}
+}
+
+/* buttons */
+.nav-btn{
+margin:10px;
+}
+
+/* image */
+img{
+max-width:300px;
+border-radius:20px;
+box-shadow:0 10px 30px rgba(0,0,0,0.2);
+}
+
+/* fullscreen photo */
+/* FULLSCREEN OVERLAY */
+.fullscreen-overlay{
+position:fixed;
+top:0;
+left:0;
+width:100vw;
+height:100vh;
+display:none;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+backdrop-filter:blur(15px);
+background:rgba(0,0,0,0.4);
+z-index:10000;
+}
+
+/* FULLSCREEN IMAGE */
+.fullscreen-image{
+max-width:90vw;
+max-height:85vh;
+border-radius:15px;
+box-shadow:0 0 30px rgba(0,0,0,0.5);
+}
+
+/* EXIT BUTTON */
+.exit-btn{
+position:absolute;
+top:20px;
+right:30px;
+}
+
+/* CONTROLS */
+.fullscreen-controls{
+margin-top:20px;
+display:flex;
+gap:15px;
+}
+
+</style>
+
+</head>
+<body style="background-image: url(./background.webp); 
+             background-size: cover; 
+             background-position: center;
+             background-repeat: no-repeat;
+             height: 100vh;
+             width: 100vw;" >
+    
+
+<!-- Page 1 Open Calendar -->
+<div class="page active" id="page1">
+
+<div class="cover" onclick="nextPage(2)">
+<h1>📅 Open Calendar</h1>
+</div>
+
+</div>
+
+
+<!-- Page 2 Calendar -->
+<div class="page " id="page2">
+
+<div class="calendar-box">
+
+<h1>March</h1>
+
+<div class="calendar">
+
+<div class="day">Sun</div>
+<div class="day">Mon</div>
+<div class="day">Tue</div>
+<div class="day">Wed</div>
+<div class="day">Thu</div>
+<div class="day">Fri</div>
+<div class="day">Sat</div>
+
+<div class="date">1</div>
+<div class="date">2</div>
+<div class="date">3</div>
+
+<div class="date highlight" onclick="nextPage(3)">
+4
+<span>Click</span>
+</div>
+
+<div class="date">5</div>
+<div class="date">6</div>
+<div class="date">7</div>
+
+<div class="date">8</div>
+<div class="date">9</div>
+<div class="date">10</div>
+<div class="date">11</div>
+<div class="date">12</div>
+<div class="date">13</div>
+<div class="date">14</div>
+
+<div class="date">15</div>
+<div class="date">16</div>
+<div class="date">17</div>
+<div class="date">18</div>
+<div class="date">19</div>
+<div class="date">20</div>
+<div class="date">21</div>
+
+<div class="date">22</div>
+<div class="date">23</div>
+<div class="date">24</div>
+<div class="date">25</div>
+<div class="date">26</div>
+<div class="date">27</div>
+<div class="date">28</div>
+
+<div class="date">29</div>
+<div class="date">30</div>
+<div class="date">31</div>
+
+</div>
+
+<!-- <button class="btn btn-secondary nav-btn " onclick="prevPage(1)">Previous</button> -->
+
+</div>
+
+</div>
+
+
+<!-- Page 3 -->
+<div class="page" id="page3">
+    <div><img src="./tipu.png" alt=""></div>
+<h1 > Hey You Birthday Gurl ..</h1>
+<p style="background-color: rgba(255,255,255,0.7); padding:15px 20px; border-radius:10px; color:#000; max-width:700px; margin:20px auto; line-height:1.6;">On 4th of March , the moon was shining bright just like your gentle and radiant personality.You bring balance, beauty, and harmony wherever you go.
+Your name, Rohini, means “the rising star” 🌟 — and truly, you light up the lives of everyone around you. Wishing you endless happiness, laughter, and magical moments today and always!</p>
+ <div >
+<button onclick="prevPage(2)" class="btn btn-secondary nav-btn">Previous</button>
+<button onclick="nextPage(4)" class="btn btn-danger nav-btn">Next</button>
+</div>
+</div>
+
+
+<!-- Page 4 -->
+<div class="page text-light" id="page4" style="background-image: url(./nightsky.webp); 
+             background-size: cover; 
+             background-position: center;
+             background-repeat: no-repeat;
+             height: 100vh;
+             width: 100vw;">
+  <div><img src="./moon.webp" alt=""></div>
+<h1>Oye Pagal</h1>
+<span> Dekho us din aur ek chand kesa dikh raha tha </span>
+
+<br>
+<div>
+<button onclick="prevPage(3)" class="btn btn-secondary nav-btn">Previous</button>
+<button onclick="nextPage(5)" class="btn btn-danger nav-btn">Next</button>
+</div>
+</div>
+
+<!-- Page 5 -->
+<div class="page" id="page5" style="background-image: url(./Rforbg.webp); 
+             background-size: cover; 
+             background-position: center;
+             background-repeat: no-repeat;
+             height: 100vh;
+             width: 100vw;" >
+             <h2 style="background-color: rgba(255,255,255,0.7); padding:15px 20px; border-radius:10px; color:#000;"> <b> Teacher said R for Rocket, but all I could think was  </b></h2>
+<h1> <b>R for Rohini ❤️</b></h1>
+<h1>Rohini</h1>
+<h2>Rohin</h2>
+<h3>Rohi</h3>
+<h4>Roh</h4>
+<h5>Ro</h5>
+<h6>R</h6>
+<br>
+<div>
+<button onclick="prevPage(4)" class="btn btn-secondary nav-btn">Previous</button>
+<button onclick="nextPage(6)" class="btn btn-danger nav-btn">Next</button>
+</div>
+</div>
+
+
+<!-- Page 6 -->
+<div class="page" id="page6" style="background-image: url(./waterbg.webp); 
+             background-size: cover; 
+             background-position: center;
+             background-repeat: no-repeat;
+             height: 100vh;
+             width: 100vw;">
+    <div><img src="./jal lijiye.webp" alt=""></div>
+<h1>Oye.......... </h1>
+<h2> A for Arti ..Jal Lijiye </h2>
+
+
+<div>
+<button onclick="prevPage(5)" class="btn btn-secondary nav-btn">Previous</button>
+<button onclick="nextPage(7)" class="btn btn-danger nav-btn">Next</button>
+</div>
+</div>
+
+
+<!-- Page 7 -->
+<div class="page" id="page7" style="background-image: url(./smile\ bg.webp); 
+             background-size: cover; 
+             background-position: center;
+             background-repeat: no-repeat;
+             height: 100vh;
+             width: 100vw;">
+<h1 style="background-color: rgba(255, 136, 0, 0.7); padding:15px 20px; border-radius:10px; color:#000;">Rohini Smile 😊</h1>
+<Span class="text-dark h4">“Smile karti raho… kya pata kal ko budhi ho jao aur daant gir jaye!” 😏</Span>
+
+<div>
+<button onclick="prevPage(6)" class="btn btn-secondary nav-btn">Previous</button>
+<button onclick="nextPage(8)" class="btn btn-danger nav-btn">Next</button>
+</div>
+</div>
+
+
+<!-- Page 8 -->
+<div class="page" id="page8" >
+    <div>
+  <a href="https://www.youtube.com/@tipsyislive7247" target="_blank" rel="noopener noreferrer">
+    <img src="./logo tipsy (1).webp" alt="Tipsy Logo">
+  </a>
+</div>
+<br>
+<h1 style="background-color: rgba(255,255,255,0.7); padding:15px 20px; border-radius:10px; color:#000;">Aur Nashedi is live 🎮</h1>
+<div>
+<button onclick="prevPage(7)" class="btn btn-secondary nav-btn">Previous</button>
+<button onclick="nextPage(9)" class="btn btn-danger nav-btn">Next</button>
+</div>
+</div>
+
+
+<!-- Page 9 -->
+<div class="page" id="page9">
+<div><img src="./Bhensh.webp" alt=""></div>
+<br>
+<h1 style="background-color: rgba(255,255,255,0.7); padding:15px 20px; border-radius:10px; color:#000;">Bhains ki Aankh 😂</h1>
+<div>
+<button onclick="prevPage(8)" class="btn btn-secondary nav-btn">Previous</button>
+<button onclick="nextPage(10)" class="btn btn-danger nav-btn">Next</button>
+</div>
+</div>
+
+
+<!-- Page 10 Gift -->
+<div class="page" id="page10">
+
+    
+<div class="gift" onclick="showPhoto()">🎁</div>
+<h3>Click the Gift</h3>
+
+<button onclick="prevPage(9)" class="btn btn-secondary nav-btn">Previous</button>
+
+</div>
+
+
+<!-- Final Photo Page -->
+<div class="page" id="photoPage">
+
+<img src="./Rohini bday.webp" id="finalPhoto">
+
+<br>
+
+<button onclick="viewFullScreen()" class="btn btn-danger fullscreen-btn">
+View in Full Screen
+</button>
+
+<!-- FULLSCREEN VIEWER -->
+<div id="fullscreenViewer" class="fullscreen-overlay">
+
+<button onclick="exitFullScreen()" class="btn btn-light exit-btn">
+✖ Exit
+</button>
+
+<img src="./Rohini bday.webp" class="fullscreen-image">
+
+<div class="fullscreen-controls">
+
+<a href="./Rohini bday.webp" download class="btn btn-success">
+Download 
+</a>
+
+<button onclick="exitFullScreen()" class="btn btn-danger">
+Close
+</button>
+
+</div>
+
+</div>
+
+<script>
+
+function nextPage(num){
+
+document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+document.getElementById("page"+num).classList.add("active");
+
+}
+
+function prevPage(num){
+
+document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+document.getElementById("page"+num).classList.add("active");
+
+}
+
+function showPhoto(){
+
+document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+document.getElementById("photoPage").classList.add("active");
+
+}
+function viewFullScreen(){
+
+document.getElementById("fullscreenViewer").style.display="flex";
+
+}
+
+function exitFullScreen(){
+
+document.getElementById("fullscreenViewer").style.display="none";
+
+}
+
+</script>
+
+</body>
+</html>
